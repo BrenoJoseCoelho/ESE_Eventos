@@ -11,7 +11,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 VOLUME /src/Eventos 
 COPY . .
-RUN dotnet restore "./Eventos/EventosApi.csproj"
+RUN dotnet restore "./EventosApi.csproj"
 COPY . .
 WORKDIR "/src/Eventos"
 RUN dotnet build "./EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
