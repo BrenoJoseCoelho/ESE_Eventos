@@ -1,5 +1,4 @@
-# Workflow para construir e testar um projeto .NET e criar uma imagem Docker.
-name: .NET Build and Docker Push
+name: .NET
 
 on:
   push:
@@ -12,35 +11,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout do código
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      # Checkout do repositório
+      - uses: actions/checkout@v4
 
-      # Configurar o .NET SDK
-      - name: Setup .NET SDK
+      # Setup do .NET SDK
+      - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
-      # Restaurar dependências do projeto
+      # Restaura as dependências
       - name: Restore dependencies
         run: dotnet restore ./Eventos/Eventos.sln
 
-      # Construir o projeto
-      - name: Build project
-        run: dotnet build ./Eventos/Eventos.sln --no-restore --configuration Release
+      # Compila o projeto
+      - name: Build
+        run: dotnet build ./Eventos/Eventos.sln --no-restore
 
-      # Rodar testes
-      - name: Run tests
+      # Executa os testes
+      - name: Test
         run: dotnet test ./Eventos/Eventos.sln --no-build --verbosity normal
 
-      # Construir e enviar a imagem Docker
+      # Build e Push da imagem Docker
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
         with:
           dockerfile: ./Eventos/Dockerfile
           context: ./Eventos
-          tags: brenojosecoelho/ese_eventos:latest
+          image: brenojosecoelho/ese_eventos
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
