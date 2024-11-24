@@ -10,13 +10,13 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Copiar os arquivos necessários (ajustando o caminho de origem conforme a estrutura do projeto)
-COPY Eventos/ Eventos/
+# Copiar a pasta Eventos para o contêiner
+COPY ESE_Eventos/Eventos /src/Eventos
 
-# Restaurar dependências
+# Restaurar dependências (ajustado para o caminho correto)
 RUN dotnet restore "/src/Eventos/EventosApi.csproj"
 
-# Copiar novamente para garantir que os arquivos necessários estão no contêiner
+# Copiar o restante dos arquivos necessários
 COPY . . 
 WORKDIR "/src/Eventos"
 RUN dotnet build "/src/Eventos/EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
