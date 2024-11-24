@@ -28,3 +28,12 @@ README.md
 !.git/config
 !.git/packed-refs
 !.git/refs/heads/**
+
+# Não ignore arquivos .csproj e .sln
+!**/*.csproj
+!**/*.sln
+
+# Não ignore a pasta Eventos
+!Eventos/**
+
+# Caso seu projeto tenha mais arquivos importantes, adicione-os aqui
