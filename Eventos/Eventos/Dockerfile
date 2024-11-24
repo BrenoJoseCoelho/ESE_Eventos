@@ -10,20 +10,19 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Copiar a pasta Eventos para o contêiner (ajustado para refletir a estrutura do diretório)
-COPY ESE_Eventos/Eventos /src/Eventos
+# Copiar a pasta Eventos (ajustado para refletir a nova estrutura do diretório)
+COPY . /src
 
 # Restaurar dependências (ajustado para o caminho correto)
-RUN dotnet restore "/src/Eventos/Eventos/EventosApi.csproj"
+RUN dotnet restore "/src/Eventos/EventosApi.csproj"
 
-# Copiar o restante dos arquivos necessários
-COPY . . 
+# Construir a aplicação
 WORKDIR "/src/Eventos"
-RUN dotnet build "/src/Eventos/Eventos/EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "/src/Eventos/EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Etapa de publicação
 FROM build AS publish
-RUN dotnet publish "/src/Eventos/Eventos/EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "/src/Eventos/EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Etapa final
 FROM base AS final
