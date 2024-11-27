@@ -7,6 +7,7 @@ using EventosApi.Services.Enterprises;
 using EventosApi.Services.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +47,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Eventos API V1");
 });
 
+app.UseMetricServer();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

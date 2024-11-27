@@ -66,15 +66,14 @@ namespace EnterpriseosApi.Controllers
         [HttpDelete("{id:Guid}")]
         public async Task<ActionResult<EnterpriseDto>> Delete(Guid id)
         {
-            var EnterpriseDto = await _EnterpriseService.GetEnterpriseById(id);
-            if (EnterpriseDto == null)
+            var enterpriseDto = await _EnterpriseService.GetEnterpriseById(id);
+            if (enterpriseDto == null)
             {
                 return NotFound("Enterprise not found");
             }
 
             await _EnterpriseService.RemoveEnterprise(id);
-
-            return Ok(EnterpriseDto);
+            return Ok(enterpriseDto); // Retorna o EnterpriseDto deletado
         }
     }
 }

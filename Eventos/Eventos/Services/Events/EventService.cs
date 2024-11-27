@@ -10,6 +10,7 @@ namespace EventosApi.Services.Events
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
+
         public EventService(IEventRepository EventRepository, IMapper mapper)
         {
             _eventRepository = EventRepository;
@@ -21,25 +22,34 @@ namespace EventosApi.Services.Events
             var eventsEntity = await _eventRepository.GetAll();
             return _mapper.Map<IEnumerable<EventDto>>(eventsEntity);
         }
+
         public async Task<EventDto> GetEventById(Guid id)
         {
             var eventEntity = await _eventRepository.GetById(id);
             return _mapper.Map<EventDto>(eventEntity);
         }
-        public async Task AddEvent(CreateEventRequest eventDto)
+
+        public async Task<EventDto> AddEvent(CreateEventRequest eventRequest)
         {
-            var eventEntity = _mapper.Map<Event>(eventDto);
+            var eventEntity = _mapper.Map<Event>(eventRequest);
             await _eventRepository.Create(eventEntity);
+            var eventDto = _mapper.Map<EventDto>(eventEntity);
+            return eventDto;
         }
+
         public async Task UpdateEvent(UpdateEventRequest eventDto)
         {
             var eventEntity = _mapper.Map<Event>(eventDto);
             await _eventRepository.Update(eventEntity);
         }
-        public async Task RemoveEvent(Guid id)
+
+        public async Task<EventDto> RemoveEvent(Guid id)
         {
-            var eventEntity = _eventRepository.GetById(id).Result;
+            var eventEntity = await _eventRepository.GetById(id);
+            if (eventEntity == null) return null;
+
             await _eventRepository.Delete(eventEntity.Id);
+            return _mapper.Map<EventDto>(eventEntity);
         }
     }
 }

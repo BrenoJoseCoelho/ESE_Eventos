@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\breno\\OneDrive\\Documentos\\GitHub\\ESE_Reservas_de_Eventos\\Eventos\\Eventos\\EventosApi.csproj": {}
+    "C:\\Users\\breno\\OneDrive\\Área de Trabalho\\Trabalho_2_ESE\\ESE_Eventos\\Eventos\\Eventos\\EventosApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\breno\\OneDrive\\Documentos\\GitHub\\ESE_Reservas_de_Eventos\\Eventos\\Eventos\\EventosApi.csproj": {
+    "C:\\Users\\breno\\OneDrive\\Área de Trabalho\\Trabalho_2_ESE\\ESE_Eventos\\Eventos\\Eventos\\EventosApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\breno\\OneDrive\\Documentos\\GitHub\\ESE_Reservas_de_Eventos\\Eventos\\Eventos\\EventosApi.csproj",
+        "projectUniqueName": "C:\\Users\\breno\\OneDrive\\Área de Trabalho\\Trabalho_2_ESE\\ESE_Eventos\\Eventos\\Eventos\\EventosApi.csproj",
         "projectName": "EventosApi",
-        "projectPath": "C:\\Users\\breno\\OneDrive\\Documentos\\GitHub\\ESE_Reservas_de_Eventos\\Eventos\\Eventos\\EventosApi.csproj",
+        "projectPath": "C:\\Users\\breno\\OneDrive\\Área de Trabalho\\Trabalho_2_ESE\\ESE_Eventos\\Eventos\\Eventos\\EventosApi.csproj",
         "packagesPath": "C:\\Users\\breno\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\breno\\OneDrive\\Documentos\\GitHub\\ESE_Reservas_de_Eventos\\Eventos\\Eventos\\obj\\",
+        "outputPath": "C:\\Users\\breno\\OneDrive\\Área de Trabalho\\Trabalho_2_ESE\\ESE_Eventos\\Eventos\\Eventos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\breno\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -62,6 +62,14 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.9.0, )"
+            },
+            "prometheus-net": {
+              "target": "Package",
+              "version": "[8.2.1, )"
+            },
+            "prometheus-net.AspNetCore": {
+              "target": "Package",
+              "version": "[8.2.1, )"
             }
           },
           "imports": [

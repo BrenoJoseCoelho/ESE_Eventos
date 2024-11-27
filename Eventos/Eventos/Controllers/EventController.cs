@@ -38,17 +38,15 @@ namespace EventosApi.Controllers
             return Ok(EventDto);
         }
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateEventRequest eventrequest)
+        public async Task<ActionResult> Post([FromBody] CreateEventRequest eventRequest)
         {
-            if (eventrequest == null)
+            if (eventRequest == null)
                 return BadRequest("Invalid Data");
 
-            await _EventService.AddEvent(eventrequest);
+            var createdEvent = await _EventService.AddEvent(eventRequest);
 
-            return new CreatedAtRouteResult("GetEvent",
-                eventrequest);
+            return CreatedAtRoute("GetEvent", new { id = createdEvent.Id }, createdEvent);
         }
-
         [HttpPut("{id:Guid}")]
         public async Task<ActionResult> Put(Guid id, [FromBody] UpdateEventRequest updateEventRequest)
         {
@@ -66,15 +64,14 @@ namespace EventosApi.Controllers
         [HttpDelete("{id:Guid}")]
         public async Task<ActionResult<EventDto>> Delete(Guid id)
         {
-            var EventDto = await _EventService.GetEventById(id);
-            if (EventDto == null)
+            var eventDto = await _EventService.GetEventById(id);
+            if (eventDto == null)
             {
                 return NotFound("Event not found");
             }
 
             await _EventService.RemoveEvent(id);
-
-            return Ok(EventDto);
+            return Ok(eventDto);
         }
     }
 }
