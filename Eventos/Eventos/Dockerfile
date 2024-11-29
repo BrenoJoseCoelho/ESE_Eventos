@@ -9,7 +9,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Eventos/EventosApi.csproj", "Eventos/"]
+COPY ["./Eventos/EventosApi.csproj", "Eventos/"]
 RUN dotnet restore "Eventos/EventosApi.csproj"
 COPY . .
 WORKDIR "/src/Eventos"
