@@ -21,7 +21,7 @@ namespace EventosApi.Services.Enterprises
             var enterprisesEntity = await _enterpriseRepository.GetAll();
             return _mapper.Map<IEnumerable<EnterpriseDto>>(enterprisesEntity);
         }
-
+        //testando build
         public async Task<EnterpriseDto> GetEnterpriseById(Guid id)
         {
             var enterpriseEntity = await _enterpriseRepository.GetById(id);
