@@ -12,7 +12,7 @@ WORKDIR /src
 COPY ["./Eventos/Eventos/EventosApi.csproj", "Eventos/"]
 RUN dotnet restore "Eventos/EventosApi.csproj"
 COPY . .
-WORKDIR "/src/Eventos"
+WORKDIR "/src/Eventos/Eventos"
 RUN dotnet build "EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
