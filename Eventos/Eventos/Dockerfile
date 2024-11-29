@@ -10,14 +10,14 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Eventos/EventosApi.csproj", "Eventos/"]
-RUN dotnet restore "./Eventos/./EventosApi.csproj"
+RUN dotnet restore "Eventos/EventosApi.csproj"
 COPY . .
 WORKDIR "/src/Eventos"
-RUN dotnet build "./EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "EventosApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
